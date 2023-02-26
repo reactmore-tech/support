@@ -8,6 +8,10 @@ use DateTimeInterface;
 
 class PeriodTime
 {
+    public DateTimeInterface $startDate;
+
+    public DateTimeInterface $endDate;
+
     public function __construct(DateTimeInterface $startDate, DateTimeInterface $endDate)
     {
         if ($startDate > $endDate) {
@@ -18,10 +22,6 @@ class PeriodTime
 
         $this->endDate = $endDate;
     }
-
-    public DateTimeInterface $startDate;
-
-    public DateTimeInterface $endDate;
 
     public static function create(DateTimeInterface $startDate, DateTimeInterface $endDate): self
     {
