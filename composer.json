@@ -1,0 +1,65 @@
+{
+    "name": "reactmore-tech/support",
+    "description": "Reactmore Tech Support, Helpers",
+    "homepage": "https://github.com/reactmore-tech/support",
+    "authors": [
+        {
+            "name": "Reactmore",
+            "homepage": "https://github.com/reactmore",
+            "role": "Developer"
+        }
+    ],
+    "version": "1.0.0",
+    "license": "MIT",
+    "require": {
+        "php": "^7.4 || ^8.0"
+    },
+    "require-dev": {
+        "codeigniter4/devkit": "^1.1",
+        "codeigniter4/framework": "^4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "ReactMoreTech\\Support\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/",
+            "Tests\\Support\\": "tests/_support"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "analyze": [
+            "phpstan analyze",
+            "psalm",
+            "rector process --dry-run"
+        ],
+        "sa": "@analyze",
+        "ci": [
+            "Composer\\Config::disableProcessTimeout",
+            "@cs",
+            "@deduplicate",
+            "@analyze",
+            "@inspect",
+            "@test"
+        ],
+        "cs": "php-cs-fixer fix --ansi --verbose --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix --ansi --verbose --diff --using-cache=yes",
+        "style": "@cs-fix",
+        "deduplicate": "phpcpd app/ src/",
+        "inspect": "deptrac analyze --cache-file=build/deptrac.cache",
+        "mutate": "infection --threads=2 --skip-initial-tests --coverage=build/phpunit",
+        "test": "phpunit"
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    }
+}
