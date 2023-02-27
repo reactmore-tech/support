@@ -5,7 +5,7 @@ namespace Tests\Adapter;
 use CodeIgniter\Test\CIUnitTestCase;
 use ReactMoreTech\Support\Exceptions\ResponseException;
 
-class TwigTest extends CIUnitTestCase
+class GuzzleTest extends CIUnitTestCase
 {
     private $client;
 
