@@ -2,7 +2,6 @@
 
 namespace ReactMoreTech\Support\Adapter;
 
-use ReactMoreTech\Support\Auth\Auth;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -15,7 +14,7 @@ interface Adapter
     /**
      * Adapter constructor.
      *
-     * @param Auth $auth
+     * @param array $headers
      * @param string $baseURI
      */
     public function __construct(array $headers, string $baseURI);

@@ -3,13 +3,12 @@
 namespace ReactMoreTech\Support;
 
 use CodeIgniter\I18n\Time;
-use ReactMoreTech\Support\Exceptions\Exception;
 use DateTimeInterface;
+use ReactMoreTech\Support\Exceptions\Exception;
 
 class PeriodTime
 {
     public DateTimeInterface $startDate;
-
     public DateTimeInterface $endDate;
 
     public function __construct(DateTimeInterface $startDate, DateTimeInterface $endDate)

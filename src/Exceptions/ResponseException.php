@@ -2,23 +2,23 @@
 
 namespace ReactMoreTech\Support\Exceptions;
 
+use Exception;
 use GuzzleHttp\Exception\RequestException;
 
-class ResponseException extends \Exception
+class ResponseException extends Exception
 {
     /**
      * Generates a ResponseException from a Guzzle RequestException.
      *
      * @param RequestException $err The client request exception (typicall 4xx or 5xx response).
-     * @return ResponseException
      */
     public static function fromRequestException(RequestException $err): self
     {
-        if (!$err->hasResponse()) {
+        if (! $err->hasResponse()) {
             return new ResponseException($err->getMessage(), 0, $err);
         }
 
-        $response = $err->getResponse();
+        $response    = $err->getResponse();
         $contentType = $response->getHeaderLine('Content-Type');
 
         // Attempt to derive detailed error from standard JSON response.
