@@ -2,6 +2,8 @@
 
 namespace ReactMoreTech\Support\Exceptions;
 
-class JSONException extends \Exception
+use Exception;
+
+class JSONException extends Exception
 {
 }

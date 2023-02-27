@@ -4,6 +4,7 @@ namespace ReactMoreTech\Support\Adapter;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use ReactMoreTech\Support\Exceptions\ResponseException;
 
@@ -12,9 +13,9 @@ class Guzzle implements Adapter
     private $client;
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
-    public function __construct(array $headers, string $baseURI = null)
+    public function __construct(array $headers, ?string $baseURI = null)
     {
         if ($baseURI === null) {
             $baseURI = 'https://httpbin.org/';
@@ -22,14 +23,13 @@ class Guzzle implements Adapter
 
         $this->client = new Client([
             'base_uri' => $baseURI,
-            'headers' => $headers,
-            'Accept' => 'application/json'
+            'headers'  => $headers,
+            'Accept'   => 'application/json',
         ]);
     }
 
-
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function get(string $uri, array $data = [], array $headers = []): ResponseInterface
     {
@@ -37,7 +37,7 @@ class Guzzle implements Adapter
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function post(string $uri, array $data = [], array $headers = []): ResponseInterface
     {
@@ -45,7 +45,7 @@ class Guzzle implements Adapter
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function put(string $uri, array $data = [], array $headers = []): ResponseInterface
     {
@@ -53,7 +53,7 @@ class Guzzle implements Adapter
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function patch(string $uri, array $data = [], array $headers = []): ResponseInterface
     {
@@ -61,7 +61,7 @@ class Guzzle implements Adapter
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function delete(string $uri, array $data = [], array $headers = []): ResponseInterface
     {
@@ -73,13 +73,13 @@ class Guzzle implements Adapter
      */
     public function request(string $method, string $uri, array $data = [], array $headers = [])
     {
-        if (!in_array($method, ['get', 'post', 'put', 'patch', 'delete'])) {
-            throw new \InvalidArgumentException('Request method must be get, post, put, patch, or delete');
+        if (! in_array($method, ['get', 'post', 'put', 'patch', 'delete'], true)) {
+            throw new InvalidArgumentException('Request method must be get, post, put, patch, or delete');
         }
 
         try {
-            $response = $this->client->$method($uri, [
-                'headers' => $headers,
+            $response = $this->client->{$method}($uri, [
+                'headers'                              => $headers,
                 ($method === 'get' ? 'query' : 'json') => $data,
             ]);
         } catch (RequestException $err) {
