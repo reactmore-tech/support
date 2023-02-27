@@ -18,7 +18,7 @@ interface Adapter
      * @param Auth $auth
      * @param string $baseURI
      */
-    public function __construct(Auth $auth, string $baseURI);
+    public function __construct(array $headers, string $baseURI);
 
     /**
      * Sends a GET request.
