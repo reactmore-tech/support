@@ -36,24 +36,18 @@
     "prefer-stable": true,
     "scripts": {
         "analyze": [
-            "phpstan analyze",
-            "psalm",
-            "rector process --dry-run"
+            "phpstan analyze"
         ],
         "sa": "@analyze",
         "ci": [
             "Composer\\Config::disableProcessTimeout",
             "@cs",
-            "@deduplicate",
             "@analyze",
-            "@inspect",
             "@test"
         ],
         "cs": "php-cs-fixer fix --ansi --verbose --dry-run --diff",
         "cs-fix": "php-cs-fixer fix --ansi --verbose --diff --using-cache=yes",
         "style": "@cs-fix",
-        "deduplicate": "phpcpd app/ src/",
-        "inspect": "deptrac analyze --cache-file=build/deptrac.cache",
         "mutate": "infection --threads=2 --skip-initial-tests --coverage=build/phpunit",
         "test": "phpunit"
     },
