@@ -1,7 +1,14 @@
 {
     "name": "reactmore-tech/support",
     "description": "Reactmore Tech Support, Helpers",
+    "license": "MIT",
+    "keywords": [
+        "Helpers",
+        "Guzzle"
+    ],
     "homepage": "https://github.com/reactmore-tech/support",
+    "type": "library",
+    "minimum-stability": "stable",
     "authors": [
         {
             "name": "Reactmore",
@@ -9,17 +16,16 @@
             "role": "Developer"
         }
     ],
-    "license": "MIT",
     "require": {
         "php": "^7.4 || ^8.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "psr/http-message": "~1.0",
         "ext-json": "*"
-        
     },
     "require-dev": {
-        "codeigniter4/devkit": "^1.1",
-        "codeigniter4/framework": "^4.3"
+        "phpunit/phpunit": "^9",
+        "squizlabs/php_codesniffer": "^3.7.2",
+        "kint-php/kint": "^6.0"
     },
     "autoload": {
         "psr-4": {
@@ -28,35 +34,11 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/",
-            "Tests\\Support\\": "tests/_support"
+            "ReactMoreTech\\Support\\Tests\\": "tests"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "scripts": {
-        "analyze": [
-            "phpstan analyze"
-        ],
-        "sa": "@analyze",
-        "ci": [
-            "Composer\\Config::disableProcessTimeout",
-            "@cs",
-            "@analyze",
-            "@test"
-        ],
-        "cs": "php-cs-fixer fix --ansi --verbose --dry-run --diff",
-        "cs-fix": "php-cs-fixer fix --ansi --verbose --diff --using-cache=yes",
-        "style": "@cs-fix",
-        "mutate": "infection --threads=2 --skip-initial-tests --coverage=build/phpunit",
-        "test": "phpunit"
-    },
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "optimize-autoloader": true,
-        "allow-plugins": {
-            "phpstan/extension-installer": true
-        }
+        "test": "phpunit",
+        "test_debug": "phpunit --debug"
     }
 }
