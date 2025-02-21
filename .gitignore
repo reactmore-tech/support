@@ -8,3 +8,4 @@ composer.lock
 # Example
 index.php
 example.php
+build/*
